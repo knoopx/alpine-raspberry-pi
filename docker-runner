@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker build runner -t runner
+docker run --privileged --rm -v /dev:/dev:ro -v "$PWD":/runner -w /runner -e ALPINE_BRANCH=edge -e ALPINE_MIRROR="http://dl-cdn.alpinelinux.org/alpine" -e ARCH=armhf runner ./make-image

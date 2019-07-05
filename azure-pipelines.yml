@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+variables:
+  ALPINE_BRANCH: edge
+  ALPINE_MIRROR: http://dl-cdn.alpinelinux.org/alpine
+
+trigger:
+- master
+
+jobs:
+- job: ARMHF
+  pool:
+    vmImage: 'ubuntu-16.04'
+  variables:
+    ARCH: armhf
+  steps:
+    - bash: sudo -E ./make-image
+    - task: GithubRelease@0
+      inputs:
+       githubConnection: Github
+       repositoryName: knoopx/alpine-raspberry-pi
+       action: 'create'
+       assetUploadMode: 'replace'
+       assets: '$(Build.Repository.LocalPath)/dist/*'
+       tagSource: manual
+       tag: $(Build.BuildNumber)
