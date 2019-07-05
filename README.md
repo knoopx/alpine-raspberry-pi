@@ -1,6 +1,6 @@
 # Alpine Raspberry PI
 
-This is a system install of Alpine linux for Raspberry Pi 3B, 3B+ and 4 image ready to burn to an SD card via (balenaEtcher)[https://www.balena.io/etcher/] (there's no need to gunzip them).
+This is a system install of Alpine linux for Raspberry Pi 3B, 3B+ and 4 image ready to burn to an SD card via [balenaEtcher](https://www.balena.io/etcher/) (there's no need to gunzip image).
 
 The image automatically setup and configures:
 
