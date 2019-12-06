@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      
+    - env:
+        ALPINE_BRANCH: edge
+        ALPINE_MIRROR: http://dl-cdn.alpinelinux.org/alpine
+        ARCH: armhf
+      run: |
+        sudo -E ./make-image
+
+    - env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        sudo snap install hub --classic
+        build_date=$(date +%Y%m%d)
+        build_number=$[$(git tag | grep $build_date | wc -l) + 1]
+        tag="$build_date.$build_number"
+        hub release create $tag -m "$tag" -a dist/*.gz
