@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-      
+
     - env:
         ALPINE_BRANCH: edge
         ALPINE_MIRROR: http://dl-cdn.alpinelinux.org/alpine
         ARCH: armhf
       run: |
-        sudo -E ./make-image
+        ./docker-runner
 
     - env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
