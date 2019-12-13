@@ -2,9 +2,9 @@
 
 set -xe
 
-mkdir -p dist
+mkdir -p dist /dist
 
-OUTPUT_IMG="dist/alpine-rpi-$ALPINE_BRANCH-$ARCH.img"
+OUTPUT_IMG="/dist/target.img"
 
 rm -Rf "$OUTPUT_IMG"
 truncate -s 2G "$OUTPUT_IMG"
@@ -95,6 +95,6 @@ losetup -d "$LOOP_DEV"
 FREE_START=$(parted -ms "$OUTPUT_IMG" unit B print free | tail -1 | cut -d ':' -f 2 | tr -d 'B')
 truncate -s $FREE_START "$OUTPUT_IMG"
 
-gzip -f "$OUTPUT_IMG"
+gzip -c "$OUTPUT_IMG" > "dist/alpine-rpi-$ALPINE_BRANCH-$ARCH.img.gz"
 
 echo "DONE."
