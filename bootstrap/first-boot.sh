@@ -8,7 +8,13 @@ cat <<EOF > /usr/bin/first-boot
 #!/bin/sh
 set -xe
 
-parted ---pretend-input-tty /dev/mmcblk0 resizepart 2 yes 100%
+cat <<PARTED | sudo parted ---pretend-input-tty /dev/mmcblk0
+unit %
+resizepart 2
+Yes
+100%
+PARTED
+
 partprobe
 resize2fs /dev/mmcblk0p2
 rc-update del first-boot
