@@ -14,6 +14,8 @@ network={
 }
 EOF
 
+ln -s /boot/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
+
 cat <<EOF > /etc/network/interfaces
 auto lo
 iface lo inet loopback

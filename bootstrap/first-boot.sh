@@ -25,8 +25,6 @@ chmod 600 /swapfile
 mkswap /swapfile
 echo "/swapfile       none            swap    sw                0       0" >> /etc/fstab
 
-cp -f /boot/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
-
 reboot
 EOF
 
