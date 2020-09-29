@@ -48,18 +48,12 @@ curl https://raw.githubusercontent.com/alpinelinux/alpine-chroot-install/master/
 
 cp -R bootstrap/ /alpine/
 
+/alpine/enter-chroot /bootstrap/kernel.sh
 /alpine/enter-chroot /bootstrap/system.sh
 /alpine/enter-chroot /bootstrap/users.sh
 /alpine/enter-chroot /bootstrap/networking.sh
 /alpine/enter-chroot /bootstrap/services.sh
-/alpine/enter-chroot /bootstrap/kernel.sh
 /alpine/enter-chroot /bootstrap/first-boot.sh
-
-svn export --force https://github.com/raspberrypi/firmware/trunk/boot /alpine/boot
-svn export --force https://github.com/raspberrypi/firmware/trunk/modules /alpine/lib/modules
-
-svn export --force https://github.com/RPi-Distro/firmware-nonfree/trunk/brcm /alpine/lib/firmware/brcm/
-svn export --force https://github.com/RPi-Distro/bluez-firmware/trunk/broadcom /alpine/lib/firmware/brcm/
 
 rm -rf /alpine/var/lib/apt/lists/*
 rm -rf /alpine/var/cache/apk/*
