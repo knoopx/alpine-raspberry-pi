@@ -58,11 +58,8 @@ cp -R bootstrap/ /alpine/
 svn export --force https://github.com/raspberrypi/firmware/trunk/boot /alpine/boot
 svn export --force https://github.com/raspberrypi/firmware/trunk/modules /alpine/lib/modules
 
-# RPI 4 Wifi does not work with firmware from RPi-Distro repo, so we take them from Raspbian Buster from now
-# svn export --force https://github.com/RPi-Distro/firmware-nonfree/trunk/brcm /alpine/lib/firmware/brcm/
-# svn export --force https://github.com/RPi-Distro/bluez-firmware/trunk/broadcom /alpine/lib/firmware/brcm/
-curl https://archive.raspberrypi.org/debian/pool/main/f/firmware-nonfree/firmware-brcm80211_20190114-1+rpt4_all.deb | dpkg -x - /alpine
-curl https://archive.raspberrypi.org/debian/pool/main/b/bluez-firmware/bluez-firmware_1.2-4+rpt2_all.deb | dpkg -x - /alpine
+svn export --force https://github.com/RPi-Distro/firmware-nonfree/trunk/brcm /alpine/lib/firmware/brcm/
+svn export --force https://github.com/RPi-Distro/bluez-firmware/trunk/broadcom /alpine/lib/firmware/brcm/
 
 rm -rf /alpine/var/lib/apt/lists/*
 rm -rf /alpine/var/cache/apk/*
