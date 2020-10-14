@@ -8,11 +8,11 @@ for service in devfs dmesg mdev; do
 	rc-update add $service sysinit
 done
 
-for service in modules sysctl hostname bootmisc swclock syslog swap; do
+for service in modules sysctl hostname bootmisc swclock syslog swap wpa_supplicant wpa_cli; do
 	rc-update add $service boot
 done
 
-for service in dbus haveged sshd chronyd local wpa_supplicant networking avahi-daemon bluetooth; do
+for service in dbus haveged sshd chronyd local networking avahi-daemon bluetooth; do
 	rc-update add $service default
 done
 
