@@ -25,6 +25,9 @@ iface eth0 inet dhcp
 
 auto wlan0
 iface wlan0 inet dhcp
+  up iwconfig wlan0 power off
+  
+hostname raspberrypi  
 EOF
 
 # avahi
