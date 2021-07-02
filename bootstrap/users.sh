@@ -13,7 +13,7 @@ done
 
 adduser -s /bin/ash -D $FIRST_USER_NAME
 
-for GRP in adm dialout cdrom audio users video games input gpio spi i2c netdev; do
+for GRP in adm dialout cdrom audio users video games input tty gpio spi i2c netdev; do
   adduser $FIRST_USER_NAME $GRP
 done
 
