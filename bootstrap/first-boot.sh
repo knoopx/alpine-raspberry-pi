@@ -20,11 +20,6 @@ resize2fs /dev/mmcblk0p2
 rc-update del first-boot
 rm /etc/init.d/first-boot /usr/bin/first-boot
 
-fallocate -l 1g /swapfile
-chmod 600 /swapfile
-mkswap /swapfile
-echo "/swapfile       none            swap    sw                0       0" >> /etc/fstab
-
 reboot
 EOF
 
