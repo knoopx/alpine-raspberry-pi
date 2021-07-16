@@ -2,9 +2,9 @@
 
 set -xe
 
-apk add openssh haveged
+apk add eudev openssh haveged
 
-for service in devfs dmesg mdev; do
+for service in devfs dmesg; do
 	rc-update add $service sysinit
 done
 
@@ -15,6 +15,8 @@ done
 for service in dbus haveged sshd chronyd local networking avahi-daemon bluetooth wpa_supplicant wpa_cli; do
 	rc-update add $service default
 done
+
+setup-udev
 
 for service in mount-ro killprocs savecache; do
 	rc-update add $service shutdown
