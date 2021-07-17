@@ -47,21 +47,13 @@ apt-get update
 curl https://raw.githubusercontent.com/alpinelinux/alpine-chroot-install/master/alpine-chroot-install | sh
 
 cp -R bootstrap/ /alpine/
-
-/alpine/enter-chroot /bootstrap/kernel.sh
-/alpine/enter-chroot /bootstrap/system.sh
-/alpine/enter-chroot /bootstrap/users.sh
-/alpine/enter-chroot /bootstrap/networking.sh
-/alpine/enter-chroot /bootstrap/services.sh
-/alpine/enter-chroot /bootstrap/first-boot.sh
+/alpine/enter-chroot run-parts /bootstrap/
 
 rm -rf /alpine/var/lib/apt/lists/*
 rm -rf /alpine/var/cache/apk/*
 rm -rf /alpine/root/*
 rm -rf /alpine/bootstrap/
-rm /alpine/enter-chroot
-rm /alpine/etc/resolv.conf
-rm /alpine/env.sh
+rm  /alpine/env.sh /alpine/etc/resolv.conf /alpine/enter-chroot /alpine/destroy
 find /alpine -iname "*-" -delete
 find /alpine -iname "*~" -delete
 
@@ -78,7 +70,12 @@ resize2fs -p "$ROOT_DEV" $ROOT_MIN_SIZE
 
 # shrink partition
 PART_END=$(($ROOT_PART_START + ($ROOT_MIN_SIZE * $ROOT_BLOCK_SIZE)))
-parted ---pretend-input-tty "$OUTPUT_IMG" unit B resizepart 2 $PART_END yes
+parted ---pretend-input-tty "$OUTPUT_IMG" <<EOF
+unit B
+resizepart 2 $PART_END
+yes
+quit
+EOF
 
 losetup -d "$LOOP_DEV"
 
