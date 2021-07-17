@@ -3,6 +3,7 @@
 set -xe
 
 apk add linux-rpi linux-rpi4 raspberrypi-bootloader zram-init
+rc-update add zram-init boot
 
 echo "modules=loop,squashfs,sd-mod,usb-storage root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes console=tty1 rootwait quiet" > /boot/cmdline.txt
 
@@ -31,4 +32,9 @@ cat <<EOF > /etc/fstab
 /dev/mmcblk0p2  /               ext4    defaults,noatime  0       1
 EOF
 
-rc-update add zram-init boot
+cat <<EOF >> /etc/sysctl.conf
+vm.vfs_cache_pressure=500
+vm.swappiness=100
+vm.dirty_background_ratio=1
+vm.dirty_ratio=50
+EOF
