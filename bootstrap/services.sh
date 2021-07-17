@@ -16,7 +16,7 @@ for service in dbus haveged sshd chronyd local networking avahi-daemon bluetooth
 	rc-update add $service default
 done
 
-setup-udev
+setup-udev -n
 
 for service in mount-ro killprocs savecache; do
 	rc-update add $service shutdown
