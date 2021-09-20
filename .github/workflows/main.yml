@@ -21,7 +21,4 @@ jobs:
         build_date=$(date +%Y%m%d)
         build_number=$[$(git tag | grep $build_date | wc -l) + 1]
         tag="$build_date.$build_number"
-        ls -la dist/*.gz
-        ls -la dist/
-        ls -la .
-        hub release create $tag -m "$tag" -a dist/*.gz
+        hub release create $tag -m "$tag" $(find . -name '*.gz' -exec echo -n '-a {} ' \;)
