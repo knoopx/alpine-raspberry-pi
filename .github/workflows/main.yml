@@ -13,9 +13,6 @@ jobs:
         docker build runner -t runner
         docker run --privileged --rm -v /dev:/dev:ro -v "$PWD":/runner -w /runner -e ALPINE_BRANCH=edge -e ALPINE_MIRROR="http://dl-cdn.alpinelinux.org/alpine" -e ARCH=aarch64 runner ./make-image
         docker run --privileged --rm -v /dev:/dev:ro -v "$PWD":/runner -w /runner -e ALPINE_BRANCH=edge -e ALPINE_MIRROR="http://dl-cdn.alpinelinux.org/alpine" -e ARCH=armv7 runner ./make-image
-        ls -la dist/
-        ls -la .
-        
 
     - env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,4 +21,7 @@ jobs:
         build_date=$(date +%Y%m%d)
         build_number=$[$(git tag | grep $build_date | wc -l) + 1]
         tag="$build_date.$build_number"
+        ls -la dist/*.gz
+        ls -la dist/
+        ls -la .
         hub release create $tag -m "$tag" -a dist/*.gz
