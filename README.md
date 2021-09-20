@@ -1,4 +1,4 @@
-g# Alpine Raspberry PI
+Alpine Raspberry PI
 
 This is a system install of Alpine linux for Raspberry Pi 0, 1, 2
 (`armv7`) and 3B, 3B+ and 4 (`aarch64`) image ready to burn
