@@ -7,7 +7,7 @@ mkdir -p dist /dist
 OUTPUT_IMG="/dist/target.img"
 
 rm -Rf "$OUTPUT_IMG"
-truncate -s 2G "$OUTPUT_IMG"
+truncate -s 512M "$OUTPUT_IMG"
 
 fdisk -H 255 -S 63 "$OUTPUT_IMG" <<-EOF
 o
