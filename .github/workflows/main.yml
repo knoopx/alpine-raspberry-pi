@@ -12,6 +12,7 @@ jobs:
     - run: |
         docker build runner -t runner
         docker run --privileged --rm -v /dev:/dev:ro -v "$PWD":/runner -w /runner -e ALPINE_BRANCH=edge -e ALPINE_MIRROR="http://dl-cdn.alpinelinux.org/alpine" -e ARCH=aarch64 runner ./make-image
+        docker run --privileged --rm -v /dev:/dev:ro -v "$PWD":/runner -w /runner -e ALPINE_BRANCH=edge -e ALPINE_MIRROR="http://dl-cdn.alpinelinux.org/alpine" -e ARCH=armv7 runner ./make-image
 
     - env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
