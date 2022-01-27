@@ -2,7 +2,7 @@
 
 set -xe
 
-apk add linux-rpi linux-rpi4 raspberrypi-bootloader zram-init
+apk add --update linux-rpi linux-rpi4 raspberrypi-bootloader zram-init
 rc-update add zram-init boot
 
 echo "modules=loop,squashfs,sd-mod,usb-storage root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes console=tty1 rootwait quiet" > /boot/cmdline.txt
@@ -42,7 +42,7 @@ EOF
 cat <<EOF >> /etc/local.d/cpufreq.start
 #!/bin/sh
 for cpu in /sys/devices/system/cpu/cpufreq/policy*; do
-  echo performance > ${cpu}/scaling_governor              
+  echo performance > ${cpu}/scaling_governor
 done
 EOF
 
