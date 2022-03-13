@@ -38,3 +38,13 @@ vm.swappiness=100
 vm.dirty_background_ratio=1
 vm.dirty_ratio=50
 EOF
+
+cat <<EOF >> /etc/local.d/cpufreq.start
+#!/bin/sh
+for cpu in /sys/devices/system/cpu/cpufreq/policy*; do
+  echo performance > ${cpu}/scaling_governor              
+done
+EOF
+
+chmod +x /etc/local.d/cpufreq.start
+rc-update add local default
