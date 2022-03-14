@@ -2,7 +2,7 @@
 
 set -xe
 
-mkdir -p dist /dist
+mkdir -p dist
 
 OUTPUT_IMG="/dist/target.img"
 
@@ -66,10 +66,10 @@ ROOT_MIN_SIZE=$(resize2fs -P "$ROOT_DEV" | cut -d ':' -f 2 | tr -d ' ')
 
 # shrink fs
 e2fsck -f -p "$ROOT_DEV"
-resize2fs -p "$ROOT_DEV" $ROOT_MIN_SIZE
+resize2fs -p "$ROOT_DEV" "$ROOT_MIN_SIZE"
 
 # shrink partition
-PART_END=$(($ROOT_PART_START + ($ROOT_MIN_SIZE * $ROOT_BLOCK_SIZE)))
+PART_END=$((ROOT_PART_START + (ROOT_MIN_SIZE * ROOT_BLOCK_SIZE)))
 parted ---pretend-input-tty "$OUTPUT_IMG" <<EOF
 unit B
 resizepart 2 $PART_END
@@ -81,7 +81,7 @@ losetup -d "$LOOP_DEV"
 
 # truncate free space
 FREE_START=$(parted -ms "$OUTPUT_IMG" unit B print free | tail -1 | cut -d ':' -f 2 | tr -d 'B')
-truncate -s $FREE_START "$OUTPUT_IMG"
+truncate -s "$FREE_START" "$OUTPUT_IMG"
 
 gzip -c "$OUTPUT_IMG" > "dist/alpine-rpi-$ALPINE_BRANCH-$ARCH.img.gz"
 
