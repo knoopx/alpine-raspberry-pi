@@ -2,7 +2,7 @@
 
 set -xe
 
-mkdir -p dist
+mkdir -p dist /dist
 
 OUTPUT_IMG="/dist/target.img"
 
