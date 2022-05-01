@@ -12,6 +12,10 @@ network={
  ssid="SSID"
  psk="PASSWORD"
 }
+
+ap_scan=1
+autoscan=periodic:10
+disable_scan_offload=1
 EOF
 
 ln -s /boot/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf
