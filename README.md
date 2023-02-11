@@ -1,15 +1,24 @@
 # Alpine Raspberry PI
 
-This is a system install of Alpine linux for Raspberry Pi 3B, 3B+ and 4 image ready to burn to an SD card via [balenaEtcher](https://www.balena.io/etcher/) (there's no need to gunzip image).
+A very customizable set of scripts to build a [System Disk Mode](https://wiki.alpinelinux.org/wiki/Installation#System_Disk_Mode) installation image of Alpine Linux for the Raspberry Pi, ready to be burnt to an SD.
 
-The image automatically setup and configures:
+# Features
 
-* root user [pwd: raspberry]
-* pi user [pwd: raspberry]
-* ethernet
-* wifi (edit `wpa_supplicant.conf` in the boot partition, on first boot it will be copied)
-* bluetooth
-* avahi
-* swap
-* openssh server
-* root partition auto-expand on first boot
+* Lightweight and memory-friendly Alpine Linux distribution
+* Supports Raspberry Pi 3B, 3B+, and 4
+* Easy setup with pre-configured system dependencies
+* Root and regular user accounts
+* Ethernet and WiFi connectivity with editable `wpa_supplicant.conf` from the FAT32 boot partition
+* Bluetooth support
+* Avahi for network service discovery
+* Swap support
+* OpenSSH server
+* Auto-expanding root partition on first boot
+* Flasheable via [balenaEtcher](https://www.balena.io/etcher/) without having to gunzip the image
+* `Dockerfile` for building the image under Docker on any OS
+
+# Untested/Unsupported
+
+* Desktop Environment
+* Audio
+* Virtualization
